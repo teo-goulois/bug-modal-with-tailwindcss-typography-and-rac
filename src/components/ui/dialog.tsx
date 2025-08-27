@@ -1,17 +1,19 @@
 "use client";
 
-import { IconX } from "@intentui/icons";
 import { useEffect, useRef } from "react";
-import type { HeadingProps, TextProps } from "react-aria-components";
+
+import type { HeadingProps } from "react-aria-components";
 import {
   Button as ButtonPrimitive,
   Dialog as DialogPrimitive,
   Heading,
   Text,
 } from "react-aria-components";
-import { twMerge } from "tailwind-merge";
-import { composeTailwindRenderProps } from "@/lib/primitive";
+
 import { Button, type ButtonProps } from "./button";
+import { twMerge } from "tailwind-merge";
+import { useMediaQuery } from "@/hooks/use-media-query";
+import { composeTailwindRenderProps } from "@/lib/primitive";
 
 const Dialog = ({
   role = "dialog",
@@ -22,7 +24,7 @@ const Dialog = ({
     <DialogPrimitive
       role={role}
       className={twMerge(
-        "peer/dialog group/dialog relative flex max-h-[inherit] flex-col overflow-hidden outline-hidden [--gutter:--spacing(6)] sm:[--gutter:--spacing(8)]",
+        "peer/dialog group/dialog relative flex max-h-[inherit] flex-col overflow-hidden outline-hidden [--gutter:--spacing(6)] [scrollbar-width:thin] sm:[--gutter:--spacing(8)] [&::-webkit-scrollbar]:size-0.5",
         className
       )}
       {...props}
@@ -34,10 +36,10 @@ const DialogTrigger = (props: React.ComponentProps<typeof ButtonPrimitive>) => (
   <ButtonPrimitive {...props} />
 );
 
-interface DialogHeaderProps extends Omit<React.ComponentProps<"div">, "title"> {
+type DialogHeaderProps = React.HTMLAttributes<HTMLDivElement> & {
   title?: string;
   description?: string;
-}
+};
 
 const DialogHeader = ({ className, ...props }: DialogHeaderProps) => {
   const headerRef = useRef<HTMLHeadingElement>(null);
@@ -83,12 +85,19 @@ const DialogHeader = ({ className, ...props }: DialogHeaderProps) => {
   );
 };
 
-interface DialogTitleProps extends HeadingProps {
+interface DialogTitleProps extends Omit<HeadingProps, "level"> {
+  level?: 1 | 2 | 3 | 4;
   ref?: React.Ref<HTMLHeadingElement>;
 }
-const DialogTitle = ({ className, ref, ...props }: DialogTitleProps) => (
+const DialogTitle = ({
+  level = 2,
+  className,
+  ref,
+  ...props
+}: DialogTitleProps) => (
   <Heading
     slot="title"
+    level={level}
     ref={ref}
     className={twMerge(
       "text-balance font-semibold text-fg text-lg/6 sm:text-base/6",
@@ -98,9 +107,7 @@ const DialogTitle = ({ className, ref, ...props }: DialogTitleProps) => (
   />
 );
 
-interface DialogDescriptionProps extends TextProps {
-  ref?: React.Ref<HTMLDivElement>;
-}
+type DialogDescriptionProps = React.ComponentProps<"div">;
 const DialogDescription = ({
   className,
   ref,
@@ -123,7 +130,7 @@ const DialogBody = ({ className, ref, ...props }: DialogBodyProps) => (
     data-slot="dialog-body"
     ref={ref}
     className={twMerge(
-      "flex max-h-[calc(var(--visual-viewport-height)-var(--visual-viewport-vertical-padding)-var(--dialog-header-height,0px)-var(--dialog-footer-height,0px))] flex-1 flex-col overflow-auto px-(--gutter) py-1",
+      "isolate flex max-h-[calc(var(--visual-viewport-height)-var(--visual-viewport-vertical-padding)-var(--dialog-header-height,0px)-var(--dialog-footer-height,0px))] flex-1 flex-col overflow-auto px-(--gutter) py-1",
       className
     )}
     {...props}
@@ -160,7 +167,7 @@ const DialogFooter = ({ className, ...props }: DialogFooterProps) => {
       ref={footerRef}
       data-slot="dialog-footer"
       className={twMerge(
-        "mt-auto flex flex-col-reverse justify-between gap-3 p-(--gutter) pt-[calc(var(--gutter)---spacing(3))] group-not-has-data-[slot=dialog-body]/dialog:pt-0 group-not-has-data-[slot=dialog-body]/popover:pt-0 sm:flex-row",
+        "isolate mt-auto flex flex-col-reverse justify-between gap-3 p-(--gutter) pt-[calc(var(--gutter)---spacing(2))] group-not-has-data-[slot=dialog-body]/dialog:pt-0 group-not-has-data-[slot=dialog-body]/popover:pt-0 sm:flex-row",
         className
       )}
       {...props}
@@ -194,8 +201,10 @@ const DialogCloseIcon = ({
   className,
   ...props
 }: CloseButtonIndicatorProps) => {
+  const isMobile = useMediaQuery("(max-width: 600px)");
   return props.isDismissable ? (
     <ButtonPrimitive
+      {...(isMobile ? { autoFocus: true } : {})}
       aria-label="Close"
       slot="close"
       className={composeTailwindRenderProps(
@@ -203,7 +212,7 @@ const DialogCloseIcon = ({
         "close absolute top-1 right-1 z-50 grid size-8 place-content-center rounded-xl hover:bg-secondary focus:bg-secondary focus:outline-hidden focus-visible:ring-1 focus-visible:ring-primary sm:top-2 sm:right-2 sm:size-7 sm:rounded-md"
       )}
     >
-      <IconX className="size-4" />
+      X
     </ButtonPrimitive>
   ) : null;
 };
