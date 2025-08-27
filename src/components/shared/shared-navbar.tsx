@@ -3,13 +3,18 @@
 import { useDisclosure } from "@/hooks/use-disclosure";
 import { SharedModal } from "./shared-modal";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 type Props = {};
 
 export const SharedNavbar = ({}: Props) => {
   const disclosureProps = useDisclosure();
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-background">
+    <div className="bg-gray-50 top-0 left-0 right-0 flex justify-between items-center z-50 bg-background">
+      <div className="flex gap-2">
+        <Link href="/">Home</Link>
+        <Link href="/page-1">Page 1</Link>
+      </div>
       <Button onPress={disclosureProps.onOpen}>Open Modal</Button>
       <SharedModal disclosureProps={disclosureProps} />
     </div>

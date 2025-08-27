@@ -7,6 +7,8 @@ import { twJoin } from "tailwind-merge";
 import { PropsWithChildren } from "react";
 import { ListBox } from "../ui/list-box";
 import { useRouter } from "next/navigation";
+import { parseAsString, useQueryState } from "nuqs";
+import Link from "next/link";
 
 type Props = {
   disclosureProps: ReturnType<typeof useDisclosure>;
@@ -14,18 +16,17 @@ type Props = {
 
 export const SharedModal = ({ disclosureProps }: Props) => {
   const router = useRouter();
+  const [search, setSearch] = useQueryState(
+    "q",
+    parseAsString.withOptions({
+      history: "push",
+      shallow: false,
+    })
+  );
   return (
     <Modal
       isOpen={disclosureProps.isOpen}
-      onOpenChange={(isOpen) => {
-        setTimeout(() => {
-          if (isOpen) {
-            disclosureProps.onOpen?.();
-          } else {
-            disclosureProps.onClose?.();
-          }
-        }, 0);
-      }}
+      onOpenChange={disclosureProps.onOpenChange}
     >
       <Modal.Content
         closeButton={false}
@@ -41,16 +42,16 @@ export const SharedModal = ({ disclosureProps }: Props) => {
         }} */
       >
         <Modal.Body className="space-y-2.5 h-full min-h-40">
-          <ListBox>
-            <ListBox.Item
-              onAction={() => {
-                router.push("/page-1");
+          <div>
+            <Link
+              href="/page-1"
+              onClick={() => {
                 disclosureProps.onClose?.();
               }}
             >
               lien
-            </ListBox.Item>
-          </ListBox>
+            </Link>
+          </div>
         </Modal.Body>
       </Modal.Content>
     </Modal>
