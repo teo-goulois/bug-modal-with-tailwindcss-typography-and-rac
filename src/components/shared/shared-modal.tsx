@@ -2,10 +2,7 @@
 
 import { useDisclosure } from "@/hooks/use-disclosure";
 import { Modal } from "../ui/modal";
-import { ButtonPrimitive } from "../ui/button";
 import { twJoin } from "tailwind-merge";
-import { PropsWithChildren } from "react";
-import { ListBox } from "../ui/list-box";
 import { useRouter } from "next/navigation";
 import { parseAsString, useQueryState } from "nuqs";
 import Link from "next/link";
@@ -16,13 +13,7 @@ type Props = {
 
 export const SharedModal = ({ disclosureProps }: Props) => {
   const router = useRouter();
-  const [search, setSearch] = useQueryState(
-    "q",
-    parseAsString.withOptions({
-      history: "push",
-      shallow: false,
-    })
-  );
+  const [search, setSearch] = useQueryState("q", parseAsString);
   return (
     <Modal
       isOpen={disclosureProps.isOpen}
@@ -41,17 +32,31 @@ export const SharedModal = ({ disclosureProps }: Props) => {
           ),
         }} */
       >
-        <Modal.Body className="space-y-2.5 h-full min-h-40">
-          <div>
-            <Link
-              href="/page-1"
-              onClick={() => {
-                disclosureProps.onClose?.();
-              }}
-            >
-              lien
-            </Link>
-          </div>
+        <Modal.Body className="space-y-2.5 h-full min-h-40 flex-col ">
+          <input
+            className="border"
+            type="text"
+            value={search ?? ""}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <Link
+            href="/page-1"
+            onClick={() => {
+              disclosureProps.onClose?.();
+              setSearch(null);
+            }}
+          >
+            Home
+          </Link>
+          <Link
+            href="/page-1"
+            onClick={() => {
+              disclosureProps.onClose?.();
+              setSearch(null);
+            }}
+          >
+            Page 1
+          </Link>
         </Modal.Body>
       </Modal.Content>
     </Modal>
