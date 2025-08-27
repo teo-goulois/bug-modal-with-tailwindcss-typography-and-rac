@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SharedNavbar } from "@/components/shared/shared-navbar";
 import { NuqsAdapter } from "nuqs/adapters/react";
+import { Providers } from "@/components/providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,10 +30,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NuqsAdapter>
+        <Providers>
           <SharedNavbar />
           {children}
-        </NuqsAdapter>
+        </Providers>
       </body>
     </html>
   );
