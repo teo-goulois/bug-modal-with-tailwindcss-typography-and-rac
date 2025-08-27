@@ -1,6 +1,5 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { NuqsAdapter } from "nuqs/adapters/react";
 import { useRouter } from "next/navigation";
 import { PropsWithChildren, useState } from "react";
