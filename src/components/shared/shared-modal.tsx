@@ -1,23 +1,21 @@
 "use client";
 
-import { useDisclosure } from "@/hooks/use-disclosure";
+import { useDisclosure, UseDisclosureProps } from "@/hooks/use-disclosure";
 import { Modal } from "../ui/modal";
 import { twJoin } from "tailwind-merge";
 import { useRouter } from "next/navigation";
 import { parseAsString, useQueryState } from "nuqs";
 import Link from "next/link";
 
-type Props = {
-  disclosureProps: ReturnType<typeof useDisclosure>;
-};
+type Props = {} & UseDisclosureProps;
 
-export const SharedModal = ({ disclosureProps }: Props) => {
+export const SharedModal = ({ ...disclosureProps }: Props) => {
   const router = useRouter();
   const [search, setSearch] = useQueryState("q", parseAsString);
   return (
     <Modal
       isOpen={disclosureProps.isOpen}
-      onOpenChange={disclosureProps.onOpenChange}
+      onOpenChange={disclosureProps.onChange}
     >
       <Modal.Content
         closeButton={false}
@@ -40,7 +38,7 @@ export const SharedModal = ({ disclosureProps }: Props) => {
             onChange={(e) => setSearch(e.target.value)}
           />
           <Link
-            href="/page-1"
+            href="/"
             onClick={() => {
               disclosureProps.onClose?.();
               setSearch(null);
