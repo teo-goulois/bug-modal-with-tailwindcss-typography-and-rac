@@ -15,7 +15,7 @@ export default function Page({
   return (
     <div>
       <p>page-06-with-prose-only</p>
-      <div className="content-prose">
+      <div className="prose">
         <h1>Hello World</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,

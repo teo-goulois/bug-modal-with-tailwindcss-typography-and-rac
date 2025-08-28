@@ -1,6 +1,5 @@
 "use client";
 
-import { NuqsAdapter } from "nuqs/adapters/react";
 import { useRouter } from "next/navigation";
 import { PropsWithChildren, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -12,13 +11,11 @@ export const Providers = ({ children }: PropsWithChildren<Props>) => {
   const router = useRouter();
   const [queryClient] = useState(() => new QueryClient());
   return (
-    <NuqsAdapter>
-      <QueryClientProvider client={queryClient}>
-        <I18nProvider locale="fr">
-          <RouterProvider navigate={router.push}>{children}</RouterProvider>
-        </I18nProvider>
-      </QueryClientProvider>
-    </NuqsAdapter>
+    <QueryClientProvider client={queryClient}>
+      <I18nProvider locale="fr">
+        <RouterProvider navigate={router.push}>{children}</RouterProvider>
+      </I18nProvider>
+    </QueryClientProvider>
   );
 };
 
