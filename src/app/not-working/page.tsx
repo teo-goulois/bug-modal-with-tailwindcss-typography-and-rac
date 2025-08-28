@@ -19,7 +19,7 @@ export default function Page({
         <p className="">Step to reproduce:</p>
         <ol>
           <li>Open the modal</li>
-          <li>Click a link with Prose, (not content prose)</li>
+          <li>Click the last link or a link with Prose, (not content prose)</li>
           <li>
             if nothing happens, reopen the modal and select another link, you
             should see the bug then now
