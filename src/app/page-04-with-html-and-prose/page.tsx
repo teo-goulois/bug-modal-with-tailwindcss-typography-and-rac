@@ -14,7 +14,7 @@ export default function Page({
 }) {
   return (
     <div>
-      <p>page-03-with-html-and-prose</p>
+      <p>page-04-with-html-and-prose</p>
       <div
         className="prose"
         dangerouslySetInnerHTML={{

@@ -46,7 +46,7 @@ export default async function Page({
   const content = (await fakePromise) as string;
   return (
     <div>
-      <p>page-04-with-html-and-prose-and-async</p>
+      <p>page-05-with-html-and-prose-and-async</p>
       <div
         className="prose prose-sm"
         dangerouslySetInnerHTML={{

@@ -27,12 +27,16 @@ export const SharedModal = ({ ...disclosureProps }: Props) => {
       label: "Page 02 With Html",
     },
     {
-      href: "/page-03-with-html-and-prose",
-      label: "Page 03 With Html And Prose",
+      href: "/page-03-with-html-and-content-prose",
+      label: "Page 03 With Html And Content Prose",
     },
     {
-      href: "/page-04-with-html-and-prose-and-async",
-      label: "Page 04 With Html And Prose And Async",
+      href: "/page-04-with-html-and-prose",
+      label: "Page 04 With Html And Prose",
+    },
+    {
+      href: "/page-05-with-html-and-prose-and-async",
+      label: "Page 05 With Html And Prose And Async",
     },
   ];
   return (
