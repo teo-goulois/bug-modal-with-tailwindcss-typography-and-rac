@@ -8,5 +8,9 @@ type Props = {};
 
 export const Providers = ({ children }: PropsWithChildren<Props>) => {
   const router = useRouter();
-  return <RouterProvider navigate={router.push}>{children}</RouterProvider>;
+  return <>{children}</>;
 };
+/* export const Providers = ({ children }: PropsWithChildren<Props>) => {
+  const router = useRouter();
+  return <RouterProvider navigate={router.push}>{children}</RouterProvider>;
+}; */
