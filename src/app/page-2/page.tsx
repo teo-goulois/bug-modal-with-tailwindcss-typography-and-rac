@@ -14,7 +14,13 @@ export default function Page({
 }) {
   return (
     <div>
-      My Page 2<div className="prose">content with propse</div>
+      <p>My Page 2</p>
+      <div
+        className="prose"
+        dangerouslySetInnerHTML={{
+          __html: "content with propse",
+        }}
+      />
     </div>
   );
 }
