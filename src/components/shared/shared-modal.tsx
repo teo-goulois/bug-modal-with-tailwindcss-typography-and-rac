@@ -55,6 +55,15 @@ export const SharedModal = ({ ...disclosureProps }: Props) => {
           >
             Page 1
           </Link>
+          <Link
+            href="/page-2"
+            onClick={() => {
+              disclosureProps.onClose?.();
+              setSearch(null);
+            }}
+          >
+            Page 2
+          </Link>
         </Modal.Body>
       </Modal.Content>
     </Modal>
