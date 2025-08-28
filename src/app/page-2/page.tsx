@@ -49,7 +49,7 @@ export default async function Page({
     <div>
       <p>My Async Page 2</p>
       <div
-        className="prose"
+        className="prose prose-sm"
         dangerouslySetInnerHTML={{
           __html: content,
         }}
