@@ -51,7 +51,8 @@ export const SharedModal = ({ prefix, ...disclosureProps }: Props) => {
         )}
       >
         <Modal.Header>
-          {prefix.replace("/", "").replace("-", " ")} Example
+          {prefix.replace("/", "").replace("-", " ")} Example -{" "}
+          {disclosureProps.isOpen ? "Open" : "Closed"}
         </Modal.Header>
         <Modal.Body className="space-y-2.5 h-full min-h-40 flex-col ">
           {links.map((link) => (
