@@ -14,11 +14,14 @@ export default function Page({
 }) {
   return (
     <div>
-      <p>My Page 1</p>
+      <p>page-03-with-html-and-prose</p>
       <div
         className="prose"
         dangerouslySetInnerHTML={{
-          __html: "content with propse",
+          __html: `
+          <h1>Hello World</h1>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+          `,
         }}
       />
     </div>

@@ -44,10 +44,9 @@ export default async function Page({
     }, 1000);
   });
   const content = (await fakePromise) as string;
-  console.log(content);
   return (
     <div>
-      <p>My Async Page 2</p>
+      <p>page-04-with-html-and-prose-and-async</p>
       <div
         className="prose prose-sm"
         dangerouslySetInnerHTML={{

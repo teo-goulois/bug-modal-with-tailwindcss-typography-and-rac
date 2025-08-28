@@ -14,7 +14,7 @@ export default function Page({
 }) {
   return (
     <div>
-      <p>My Page 1 without inner html</p>
+      <p>page-01-simple</p>
     </div>
   );
 }
