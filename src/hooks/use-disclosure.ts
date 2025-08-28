@@ -36,9 +36,7 @@ export function useDisclosure(props: UseDisclosureProps = {}) {
 
   const onClose = useCallback(() => {
     if (!isControlled) {
-      setTimeout(() => {
-        setIsOpen(false);
-      }, 201);
+      setIsOpen(false);
     }
     onClosePropCallbackRef?.();
   }, [isControlled, onClosePropCallbackRef]);
