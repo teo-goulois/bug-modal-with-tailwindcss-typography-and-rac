@@ -1,13 +1,13 @@
 "use client";
 
-import { UseDisclosureProps } from "@/hooks/use-disclosure";
+import { useDisclosure, UseDisclosureProps } from "@/hooks/use-disclosure";
 import { Modal } from "../ui/modal";
 import { twJoin } from "tailwind-merge";
 import { Link } from "../ui/link";
 
 type Props = {
   prefix: string;
-} & UseDisclosureProps;
+} & ReturnType<typeof useDisclosure>;
 
 export const SharedModal = ({ prefix, ...disclosureProps }: Props) => {
   const links = [
@@ -43,10 +43,9 @@ export const SharedModal = ({ prefix, ...disclosureProps }: Props) => {
   return (
     <Modal
       isOpen={disclosureProps.isOpen}
-      onOpenChange={disclosureProps.onChange}
+      onOpenChange={disclosureProps.onOpenChange}
     >
       <Modal.Content
-        closeButton={false}
         className={twJoin(
           "max-h-[90dvh] md:w-[calc(100dvw-1rem)] md:!max-w-none md:h-[calc(100dvh-1rem)] md:max-h-screen"
         )}

@@ -4,6 +4,8 @@ import { useDisclosure } from "@/hooks/use-disclosure";
 import { SharedModal } from "./shared-modal";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { twJoin } from "tailwind-merge";
 
 type Props = {
   prefix: string;
@@ -11,15 +13,35 @@ type Props = {
 
 export const SharedNavbar = ({ prefix }: Props) => {
   const disclosureProps = useDisclosure();
+  const pathname = usePathname();
+
+  const links = [
+    {
+      href: "/not-working",
+      label: "Not Working",
+      isActive: pathname.startsWith("/not-working"),
+    },
+    {
+      href: "/working",
+      label: "Working",
+      isActive: pathname.startsWith("/working"),
+    },
+  ];
   return (
     <div className="bg-gray-50 top-0 py-4 px-8  fixed left-0 right-0 flex justify-between items-center z-50">
       <div className="flex gap-2">
-        <Link href="/not-working" className="px-4 py-2 border border-gray-300">
-          Not Working
-        </Link>
-        <Link href="/working" className="px-4 py-2 border border-gray-300">
-          Working
-        </Link>
+        {links.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className={twJoin(
+              "px-4 py-2 border border-gray-300",
+              link.isActive && "bg-gray-200"
+            )}
+          >
+            {link.label}
+          </Link>
+        ))}
       </div>
       <Button onPress={disclosureProps.onOpen}>Open Modal</Button>
       <SharedModal prefix={prefix} {...disclosureProps} />
