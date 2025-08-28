@@ -5,16 +5,17 @@ export const metadata: Metadata = {
   description: "description",
 };
 
-export default function Page({
+export default async function Page({
   params,
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   return (
     <div>
-      <p>My Page 2</p>
+      <p>My Async Page 2</p>
       <div
         className="prose"
         dangerouslySetInnerHTML={{

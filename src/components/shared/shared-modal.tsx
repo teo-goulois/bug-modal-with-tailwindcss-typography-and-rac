@@ -5,7 +5,7 @@ import { Modal } from "../ui/modal";
 import { twJoin } from "tailwind-merge";
 import { useRouter } from "next/navigation";
 import { parseAsString, useQueryState } from "nuqs";
-import Link from "next/link";
+import { Link } from "../ui/link";
 
 type Props = {} & UseDisclosureProps;
 
@@ -39,7 +39,7 @@ export const SharedModal = ({ ...disclosureProps }: Props) => {
           />
           <Link
             href="/"
-            onClick={() => {
+            onPress={() => {
               disclosureProps.onClose?.();
               setSearch(null);
             }}
@@ -48,7 +48,7 @@ export const SharedModal = ({ ...disclosureProps }: Props) => {
           </Link>
           <Link
             href="/page-1"
-            onClick={() => {
+            onPress={() => {
               disclosureProps.onClose?.();
               setSearch(null);
             }}
@@ -62,7 +62,7 @@ export const SharedModal = ({ ...disclosureProps }: Props) => {
               setSearch(null);
             }}
           >
-            Page 2
+            Async Page 2
           </Link>
         </Modal.Body>
       </Modal.Content>
