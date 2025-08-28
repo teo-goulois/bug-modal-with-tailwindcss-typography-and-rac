@@ -5,36 +5,38 @@ import { Modal } from "../ui/modal";
 import { twJoin } from "tailwind-merge";
 import { Link } from "../ui/link";
 
-type Props = {} & UseDisclosureProps;
+type Props = {
+  prefix: string;
+} & UseDisclosureProps;
 
-export const SharedModal = ({ ...disclosureProps }: Props) => {
+export const SharedModal = ({ prefix, ...disclosureProps }: Props) => {
   const links = [
     {
-      href: "/",
+      href: `${prefix}/`,
       label: "Home",
     },
     {
-      href: "/page-01-simple",
+      href: `${prefix}/page-01-simple`,
       label: "Page 01 Simple",
     },
     {
-      href: "/page-02-with-html",
+      href: `${prefix}/page-02-with-html`,
       label: "Page 02 With Html",
     },
     {
-      href: "/page-03-with-html-and-content-prose",
+      href: `${prefix}/page-03-with-html-and-content-prose`,
       label: "Page 03 With Html And Content Prose",
     },
     {
-      href: "/page-04-with-html-and-prose",
+      href: `${prefix}/page-04-with-html-and-prose`,
       label: "Page 04 With Html And Prose",
     },
     {
-      href: "/page-05-with-html-and-prose-and-async",
+      href: `${prefix}/page-05-with-html-and-prose-and-async`,
       label: "Page 05 With Html And Prose And Async",
     },
     {
-      href: "/page-06-with-prose-only",
+      href: `${prefix}/page-06-with-prose-only`,
       label: "Page 06 With Prose Only",
     },
   ];
@@ -49,6 +51,9 @@ export const SharedModal = ({ ...disclosureProps }: Props) => {
           "max-h-[90dvh] md:w-[calc(100dvw-1rem)] md:!max-w-none md:h-[calc(100dvh-1rem)] md:max-h-screen"
         )}
       >
+        <Modal.Header>
+          {prefix.replace("/", "").replace("-", " ")} Example
+        </Modal.Header>
         <Modal.Body className="space-y-2.5 h-full min-h-40 flex-col ">
           {links.map((link) => (
             <Link

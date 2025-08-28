@@ -7,9 +7,6 @@ import { RouterProvider } from "react-aria-components";
 type Props = {};
 
 export const Providers = ({ children }: PropsWithChildren<Props>) => {
-  return <>{children}</>;
-};
-/* export const Providers = ({ children }: PropsWithChildren<Props>) => {
   const router = useRouter();
   return <RouterProvider navigate={router.push}>{children}</RouterProvider>;
-}; */
+};
