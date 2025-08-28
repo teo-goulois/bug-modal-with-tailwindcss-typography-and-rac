@@ -14,7 +14,7 @@ export default function Page({
 }) {
   return (
     <div>
-      My Page 1<div className="prose">content with propse</div>
+      My Page 2<div className="prose">content with propse</div>
     </div>
   );
 }
