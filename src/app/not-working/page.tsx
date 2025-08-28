@@ -18,6 +18,7 @@ export default function Page({
       <div className="">
         <p className="">Step to reproduce:</p>
         <ol>
+          <li>Use Chrome</li>
           <li>Open the modal</li>
           <li>Click the last link or a link with Prose, (not content prose)</li>
           <li>
