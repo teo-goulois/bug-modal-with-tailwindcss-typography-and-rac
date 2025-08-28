@@ -14,13 +14,7 @@ export default function Page({
 }) {
   return (
     <div>
-      <p>page-02-with-html</p>
-      <div
-        className="prose"
-        dangerouslySetInnerHTML={{
-          __html: "<h1>Hello World</h1>",
-        }}
-      />
+      <p>page-01-simple</p>
     </div>
   );
 }
