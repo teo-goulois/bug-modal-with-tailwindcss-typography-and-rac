@@ -12,6 +12,25 @@ type Props = {} & UseDisclosureProps;
 export const SharedModal = ({ ...disclosureProps }: Props) => {
   const router = useRouter();
   const [search, setSearch] = useQueryState("q", parseAsString);
+
+  const links = [
+    {
+      href: "/",
+      label: "Home",
+    },
+    {
+      href: "/page-1",
+      label: "Page 1",
+    },
+    {
+      href: "/page-1-without-inner-html",
+      label: "Page 1 without inner html",
+    },
+    {
+      href: "/page-2",
+      label: "Async Page 2",
+    },
+  ];
   return (
     <Modal
       isOpen={disclosureProps.isOpen}
@@ -37,33 +56,18 @@ export const SharedModal = ({ ...disclosureProps }: Props) => {
             value={search ?? ""}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <Link
-            href="/"
-            onPress={() => {
-              disclosureProps.onClose?.();
-              setSearch(null);
-            }}
-          >
-            Home
-          </Link>
-          <Link
-            href="/page-1"
-            onPress={() => {
-              disclosureProps.onClose?.();
-              setSearch(null);
-            }}
-          >
-            Page 1
-          </Link>
-          <Link
-            href="/page-2"
-            onClick={() => {
-              disclosureProps.onClose?.();
-              setSearch(null);
-            }}
-          >
-            Async Page 2
-          </Link>
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onPress={() => {
+                disclosureProps.onClose?.();
+                setSearch(null);
+              }}
+            >
+              {link.label}
+            </Link>
+          ))}
         </Modal.Body>
       </Modal.Content>
     </Modal>
