@@ -1,6 +1,5 @@
 "use client";
 
-import { useDisclosure } from "@/hooks/use-disclosure";
 import { SharedModal } from "./shared-modal";
 import { Button } from "../ui/button";
 import Link from "next/link";
@@ -12,7 +11,8 @@ type Props = {
 };
 
 export const SharedNavbar = ({ prefix }: Props) => {
-  const disclosureProps = useDisclosure();
+  const [isOpen, setIsOpen] = useState(false);
+
   const pathname = usePathname();
 
   const links = [
@@ -43,8 +43,22 @@ export const SharedNavbar = ({ prefix }: Props) => {
           </Link>
         ))}
       </div>
-      <Button onPress={disclosureProps.onOpen}>Open Modal</Button>
-      <SharedModal prefix={prefix} {...disclosureProps} />
+      <div className="flex gap-2">
+        <Button onPress={() => setIsOpen(true)}>Open Modal</Button>
+      </div>
+      <SharedModal
+        prefix={prefix}
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        onOpenChange={() => {
+          setIsOpen((prev) => {
+            if (prev) {
+              return false;
+            }
+            return true;
+          });
+        }}
+      />
     </div>
   );
 };

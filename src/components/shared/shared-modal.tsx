@@ -1,6 +1,5 @@
 "use client";
 
-import { useDisclosure, UseDisclosureProps } from "@/hooks/use-disclosure";
 import { Modal } from "../ui/modal";
 import { twJoin } from "tailwind-merge";
 import { Link } from "../ui/link";
@@ -11,7 +10,10 @@ import { useEffect, useRef } from "react";
 
 type Props = {
   prefix: string;
-} & ReturnType<typeof useDisclosure>;
+  onClose: () => void;
+  isOpen: boolean;
+  onOpenChange: () => void;
+};
 
 export const SharedModal = ({ prefix, ...disclosureProps }: Props) => {
   const pathname = usePathname();
